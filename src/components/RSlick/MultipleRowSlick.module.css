@@ -1,0 +1,26 @@
+
+
+
+.slick-prev:before, .slick-next:before {
+    color: gray !important;
+    font-size: 4rem !important;
+}
+
+.slick-prev{
+    margin-left: -40px;
+}
+
+.slick-slide , .slick-cloned{
+    margin : 0 30px !important;
+}
+
+
+
+.active_film{
+    @apply bg-gray-800 text-white ;
+}
+
+
+.none_active_film{
+    @apply bg-white text-gray-800 ;
+}

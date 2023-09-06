@@ -1,0 +1,36 @@
+.ghe{
+    width: 35px ;
+    height: 35px;
+    /* border : none; */
+    border-radius :5px;
+    cursor: pointer;
+    margin: 10px;
+    background-color:rgb(123, 122, 122);
+    color:#fff;
+}
+
+.gheDaDat{
+    background-color: rgb(234, 124, 124);
+    cursor: no-drop;
+}
+
+.gheDangDat{
+    background-color:rgb(18, 176, 78) !important;
+}
+.gheVip{
+    background-color:rgb(228, 74, 8)
+}
+
+.gheTuDat{
+    background-color: #fff;
+    border: 1px solid orange;
+    box-shadow: -1px -1px 28px -5px rgba(0,0,0,0.75);
+-webkit-box-shadow: -1px -1px 28px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px -1px 28px -5px rgba(0,0,0,0.75);
+}
+
+.gheKhachDat{
+    background-color: rgb(184, 41, 184);
+
+    cursor: no-drop;
+}
