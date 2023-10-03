@@ -11,7 +11,8 @@
 }
 
 .slick-slide , .slick-cloned{
-    margin : 0 30px !important;
+    /* margin : 0 30px !important; */
+    /* width: 270px !important */
 }
 
 
@@ -24,3 +25,5 @@
 .none_active_film{
     @apply bg-white text-gray-800 ;
 }
+
+

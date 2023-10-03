@@ -59,7 +59,6 @@ export const QuanLyPhimReducer=(state=stateDefault, action)=>{
         }
         case SET_PHIM_DETAIL:{
             state.filmDetail=action.filmDetail;
-            console.log(state.filmDetail);
             return {...state};
         }
         case SET_THONG_TIN_PHIM:{

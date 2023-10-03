@@ -1,15 +1,16 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import manHinh from '../../assets/img/screen.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { datVeAction, layThongTinPhongVeAction } from '../../redux/actions/ThongTinPhongVeAction';
 import style from './Checkout.module.css'
+import './Checkout.css'
 import _ from 'lodash'
 // import './Checkout.css'
 import { CheckOutlined, CloseOutlined, UserOutlined, SmileOutlined, HomeOutlined } from '@ant-design/icons'
 import { CHANGE_TAB_ACTIVE, SET_GHE_DANG_DAT } from '../../redux/type/ThongTinPhongVeType';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
-import { Tabs } from 'antd';
-import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import { Modal, Tabs } from 'antd';
+import { layThongTinNguoiDungAction, layThongTinNguoiDungCheckoutAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
 import { connect } from 'formik';
 // import {connection} from '../../index'
@@ -18,18 +19,46 @@ function Checkout(props) {
   const { id } = props.match.params
   const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
   const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.ThongTinPhongVeReducer);
-  console.log(danhSachGheKhachDat)
   const { thongTinPhim, danhSachGhe } = chiTietPhongVe
   const dispatch = useDispatch();
+  const [timer, setTimer] = useState(420);
+
+  const errorCheckout = async () => {
+    console.log(123)
+    await Modal.info({
+        title: 'Quyền truy cập ',
+        content: 'Đã hết thời gian đặt vé bạn có muốn quay lại trang trang đặt vé ?',
+        onOk:()=>{
+          history.go(1)
+        },
+        okCancel:()=>{}
+      });
+      history.push('/')
+    };
+    console.log(props)
+
+ 
   useEffect(() => {
     dispatch(layThongTinPhongVeAction(props.match.params.id))
+    const intervalId = setInterval(() => {
+      setTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
 
-
-    // load danh sách ghế đang đặt từ server về
-    // connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-    //   console.log('danhSachGheKhachDat',dsGheKhachDat);
-    // })
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [])
+
+  
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    if(seconds===0){
+      errorCheckout()
+      history.goBack()
+    }
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  };
 
   const renderGhe = () => {
     return danhSachGhe.map((ghe, index) => {
@@ -41,7 +70,6 @@ function Checkout(props) {
       }
       let classGheKhachDat = '';
       let indexGheKhachDat = danhSachGheKhachDat.findIndex((gheKD => gheKD.maGhe === ghe.maGhe))
-      console.log(indexGheKhachDat)
       if (indexGheKhachDat !== -1) {
         classGheKhachDat = 'gheKhachDat'
       }
@@ -58,24 +86,25 @@ function Checkout(props) {
             gheDangDat: ghe
           })
         }} disabled={ghe.daDat || classGheKhachDat !==''} className={` ${style[classGheDangDat]} ${style[classGheDaDat]} ${style[classGheVip]}  ${style['ghe']} ${style[classGheTuDat]} ${style[classGheKhachDat]}`}>
-          {ghe.daDat ? ghe.taiKhoanNguoiDat === userLogin.taiKhoan ? <UserOutlined style={{ fontSize: '20px', color: 'orange', fontWeight:'100' }} /> : <CloseOutlined style={{ fontSize: '25px', fontWeight: 600 }} /> : classGheDaDat!=='' ? <SmileOutlined/>  : ghe.stt}
+          {ghe.daDat ? ghe.taiKhoanNguoiDat === userLogin.taiKhoan ? <UserOutlined className='gheDaDatIcon' style={{ fontSize: '20px', color: 'orange', fontWeight:'100' }} /> : <CloseOutlined  className='gheKhachDatIcon' style={{ fontSize: '25px', fontWeight: 600 }} /> : classGheDaDat!=='' ? <SmileOutlined/>  : ghe.stt}
         </button>
         {(index + 1) % 16 === 0 ? <br /> : ''}
       </Fragment>
     })
   }
   return (
-    <div className='grid grid-cols-12 h-screen'>
+    <div className={`grid grid-cols-12 h-screen ${style.checkout} `}>
       <div className='col-span-9'>
         <div className=' mt-5 flex flex-col justify-center items-center'>
+            <div  className='w-full text-red-500 text-3xl text-right mr-52 font-semibold pb-2'> <span className='font-normal countDown'>Thời gian còn lại : </span>{formatTime(timer)}</div>
           <div className='mb-10 w-full flex justify-center'>
             <img src={manHinh} style={{ width: '80%' }} alt="" />
           </div>
-          <div className='mx-10' style={{ marginTop: '-80px' }}>
+          <div className={`mx-10 ${style.sit}` } style={{ marginTop: '-80px' }}>
             {renderGhe()}
           </div>
         </div>
-        <div className='w-full  flex justify-center'>
+        <div className={`w-full   flex justify-center ${style.info_sit}`}>
           <table className="table-auto mb-0">
             <thead className='px-5'>
               <tr className=''>
@@ -111,9 +140,17 @@ function Checkout(props) {
             </tbody>
           </table>
         </div>
+      <div className={`${style.info_sit_mobile}`} style={{display:'none'}}>
+      <button className={style.ghe}></button> : Ghế chưa đặt <br /> 
+      <button className={`${style.gheDaDat} ${style.ghe}`}></button>: Ghế đã đặt <br /> 
+      <button className={`${style.gheDangDat} ${style.ghe}`}></button> : Ghế đang đặt <br /> 
+      <button className={`${style.gheTuDat} ${style.ghe}`}></button>: Ghế tự đặt <br /> 
+      <button className={`${style.gheVip} ${style.ghe}`}></button> : Ghế Vip <br /> 
+      <button className={`${style.gheKhachDat} ${style.ghe}`}></button> : Ghế khách đặt <br />
+      </div>
       </div>
       <div className='col-span-3 h-full'>
-        <div className='px-5 h-3/5'>
+        <div className={` px-5 h-3/5 ${style.datVe} `}>
           <h3 className='text-green-500 text-center text-4xl'>{danhSachGheDangDat.reduce((tong, ghe, index) => {
             return tong += ghe.giaVe
           }, 0).toLocaleString()}VND</h3>
@@ -146,7 +183,7 @@ function Checkout(props) {
           </div>
           <hr />
         </div>
-        <div className='h-2/5' style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
+        <div className='h-2/5 ' style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'column' }}>
           <div className='bg-green-600 p-3 text-center text-white text-lg font-medium mb-5 cursor-pointer' onClick={() => {
             const thongTinVeDaDat = new ThongTinDatVe();
             thongTinVeDaDat.maLichChieu = props.match.params.id;
@@ -168,7 +205,7 @@ export default function Demo(props) {
   const dispatch = useDispatch()
   console.log(thongTinNguoiDung)
   useEffect(() => {
-    dispatch(layThongTinNguoiDungAction())
+    dispatch(layThongTinNguoiDungCheckoutAction())
   }, [])
 
   const renderTicketItem = () => {
@@ -202,13 +239,17 @@ export default function Demo(props) {
   },[])
 
   return (
-    <div className='p-5'>
-      <Tabs defaultActiveKey='1' activeKey={tabActive} className='mb-0' onChange={(key) => {
+    <div className={`${style.header_checkout} header_checkout`}>
+      <Tabs className={` mb-0 mr-20 ${style.header}`} defaultActiveKey='1' activeKey={tabActive}  onChange={(key) => {
         dispatch({
           type: CHANGE_TAB_ACTIVE,
           number: key
         })
       }} >
+         <Tabs.TabPane className={'home'}  tab={<HomeOutlined className={`${style.home_icon}`} style={{fontSize:25}} onClick={()=>{
+          history.push('/home')
+        }}/>}  key='3'>
+        </Tabs.TabPane>
         <Tabs.TabPane tab={<h2 className='text-lg font-semibold'>01 CHỌN GHẾ & THANH TOÁN</h2>} key={'1'}>
           <Checkout {...props} />
         </Tabs.TabPane>
@@ -226,10 +267,6 @@ export default function Demo(props) {
               </div>
             </section>
           </div>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab={<HomeOutlined style={{fontSize:25}} onClick={()=>{
-          history.push('/home')
-        }}/>}  key='3'>
         </Tabs.TabPane>
       </Tabs>
     </div>

@@ -29,7 +29,6 @@ export const layThongTinLichChieuAction = (id) => {
                 filmDetail: data.content
             })
         }
-        console.log(data)
     }
 }
 
@@ -38,7 +37,6 @@ export const themUploadHinhAction = (formData) => {
         dispatch(displayLoadingAction)
         try {
             const { data, status } = await quanLyPhimServices.themPhimUploadHinh(formData);
-            console.log(data)
             if (status === STATUS_CODE.SUCCESS) {
                 await notificationFunction('success', 'Thêm phim thành công !');
                 history.push('/admin/films');

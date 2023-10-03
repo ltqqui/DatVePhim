@@ -69,11 +69,11 @@ export const AdminTemplate = (props) => {
             >
                 <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="logo m-3">
-                        <img src="/img/logo2.png" alt="" />
+                        <img src="/img/logoTix.png"  width ={100} onClick={()=>{history.push('/home')}} alt="" />
                     </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
                 </Sider>
-                <Layout className="site-layout">
+                <Layout className="site-layout">    
                     <Header
                         className="site-layout-background"
                         style={{display:'flex', justifyContent:'space-between'}}

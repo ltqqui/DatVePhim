@@ -8,28 +8,32 @@ export default function Footer() {
         <footer className="py-6 dark:bg-gray-800 dark:text-gray-500  ">
             <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
                 <div className="grid grid-cols-12">
-                    <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
+                    <div className="pb-6 col-span-full md:pb-0 md:col-span-4">
                         <a rel="noopener noreferrer" href="#" className="flex justify-center space-x-3 md:justify-start">
                             <div className="flex items-center justify-center w-12 h-12 rounded-full">
                             </div>
-                           <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="" />
+                           <img src="/img/logoTix.png" alt="" />
                         </a>
                     </div>
-                    <div className="col-span-6 text-center md:text-left md:col-span-3">
-                        <p className="pb-1 text-lg font-medium text-white">Pathner</p>
-                        <div className='grid grid-cols-3'>
+                    <div className="col-span-6 text-center md:text-left md:col-span-4">
+                        <p className="pb-1 text-lg font-medium text-white text-center">Pathner</p>
+                       <div className='flex justify-center items-center'>
+                       <div className='grid grid-cols-3 gap-x-20'>
                            {arrHeThongRap.map((htr,index)=>{
                             return <div key={index}>
                                 <img src={htr.logo} style={{width:50, marginTop:15}} alt="" />
                             </div>
                            })}
                         </div>
+                       </div>
                     </div>
                     <div className="col-span-6 text-center md:text-left md:col-span-3">
-                        <p className="pb-1 text-lg font-medium text-white">Mobile App</p>
+                        <p className="pb-1 text-lg font-medium text-white text-center">Mobile App</p>
+                        <div className='flex justify-center items-center'>
                         <div className='flex'>
-                        {/* <img src="https://movie-booking-project.vercel.app/img/mobile-system/apple-logo.png" style={{width:30}} alt='' />
-                              <img src="https://movie-booking-project.vercel.app/img/mobile-system/android-logo.png" style={{width:30 , marginLeft:30}}alt="" /> */}
+                        <img src="/img/apple-logo.png" style={{width:30}} alt='' />
+                              <img src="/img/android-logo.png" style={{width:30 , marginLeft:30}}alt="" />
+                        </div>
                         </div>
                     </div>
                 </div>

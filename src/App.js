@@ -25,19 +25,17 @@ import UserManagement from "./page/Admin/UserManagement/UserManagement";
 import AddUser from "./page/Admin/UserManagement/AddUser/AddUser";
 import EditUser from "./page/Admin/UserManagement/EditUser/EditUser";
 import Profile from "./page/Profile/Profile";
-
 export const  history =createBrowserHistory();
-function App() {
+function App(props) {
   return (
     <Router history={history}>
       <Loading/>
       <Switch>
         <HomeTemplate exact path='/' Component={Home}/>
         <HomeTemplate  exact path='/home' Component={Home}/>
-        <HomeTemplate exact path='/contact' Component={Contact}/>
-        <HomeTemplate exact path='/news' Component={New}/>
         <HomeTemplate exact path='/profile' Component={Profile}/>
         <HomeTemplate exact path='/detail/:id' Component={Detail}/>
+        <HomeTemplate exact path='/news' Component={New}/>
         <UserTemplate exact path ='/login' Component={Login} />
         <UserTemplate exact path ='/register' Component={Register} />
         <AdminTemplate exact path='/admin/films' Component={Films} />

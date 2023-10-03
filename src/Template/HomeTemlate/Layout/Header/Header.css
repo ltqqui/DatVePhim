@@ -1,0 +1,66 @@
+.menu-mobile1{
+    top: 0;
+    right: 0;
+    display: block !important;
+    transition: all 0.5s;
+    animation: displayMenu 0.5s 1;
+    width: 230px !important;
+    height: 280px !important;
+}
+.menu-mobile2{
+    display: block !important;
+    transition: all 0.5s;
+    animation: hideMenu 0.5s 1;
+    width: 230px !important;
+    height: 280px !important;
+    /* transform: scale(0);
+     */
+     transform: translateX(100%);
+}
+.menu-icon{
+    padding: 0;
+    transition: all 0.5s;
+    cursor: pointer !important;
+}
+header .menu-item button{
+    font-size: 15px !important;
+}
+header .menu-item{
+    position: relative;
+    justify-content: flex-start;
+    padding: 0 15px;
+}
+header .menu-mobile1::before{
+    content :'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: red;
+    
+}
+    header .name-user{
+        padding: 5px 20px !important;
+        border-radius: 5px;
+
+    }
+header .menu-item a{
+    color: #fff !important;
+}
+@keyframes displayMenu {
+    from {
+        transform: translateX(100%);
+    }
+    to{
+        transform: translateX(0%);
+
+    }
+}
+@keyframes hideMenu {
+    from{
+        transform: translateX(0%);
+    }
+    to{
+        transform: translateX(100%);
+    }
+}

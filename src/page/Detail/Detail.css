@@ -1,0 +1,88 @@
+.detail .ant-tabs-nav-wrap{
+    display: flex !important;
+    justify-content: center !important;
+}
+@media screen and (max-width: 1240px ){
+    .detail-top{
+        position: relative;
+        display: block;
+    }
+    .detail-top-right{
+        display: none;
+    }
+    .rate-detail{
+        position: absolute;
+        right: 15%;
+    }
+    .detail-bottom{
+        grid: none;
+        margin-left: 0;
+    }
+    .detail-item{
+        width: 700px !important;
+    }
+}
+
+@media screen and (max-width: 480px  ){
+    .detail-top{
+        position: relative;
+        display: block !important;
+    }
+    .info{
+        display: block;
+    }
+    .info1{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .rate-detail{
+        margin-top: 0px !important;
+    }
+    .date-film{
+        margin-top: 5px;
+        font-size: 15px !important;
+    }
+    .name-film{
+        margin-bottom: 5px;
+        font-size: 25px !important;
+    }
+    .detail-item{
+        width: 100% !important;
+    }
+
+    .detail .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+        width: 200px !important;
+    }
+    .detail .ant-tabs-tab-btn {
+        width: 30px !important;
+    }
+    .detail .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list{
+        justify-content: space-between;
+        width: 100% !important;
+    }
+    .detail .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list .choose{
+        font-size: 15px !important;
+        /* display: none !important; */
+    }
+    .detail .ant-tabs-tab{
+        width: 30% !important;
+    }
+    .detail .gioChieu{
+        grid-template-columns: 1fr 1fr  !important;
+    }
+    .detail .danhGia{
+        /* display: block !important; */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .detail .big{
+        margin: 0;
+    }
+    .detail .star{
+        margin: 0;
+        margin-bottom: 5px;
+    }
+    
+}

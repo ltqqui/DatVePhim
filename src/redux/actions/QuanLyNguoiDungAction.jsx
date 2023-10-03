@@ -27,6 +27,25 @@ export const layThongTinNguoiDungAction = () => {
         try {
             dispatch(displayLoadingAction)
             const { data, status } = await quanLyNguoiDungServices.layThongTinNguoiDung();
+            console.log(status)
+            if (status === STATUS_CODE.SUCCESS) {
+                dispatch({
+                    type: SET_THONG_TIN_NGUOI_DUNG,
+                    thongTinNguoiDung: data.content
+                })
+            }
+            dispatch(hideLoadingAction)
+        } catch (error) {
+            await dispatch(hideLoadingAction)
+            console.log(error)
+        }
+    }
+}
+export const layThongTinNguoiDungCheckoutAction = () => {
+    return async dispatch => {
+        try {
+            dispatch(displayLoadingAction)
+            const { data, status } = await quanLyNguoiDungServices.layThongTinNguoiDung();
             console.log(data)
             if (status === STATUS_CODE.SUCCESS) {
                 dispatch({
@@ -34,6 +53,7 @@ export const layThongTinNguoiDungAction = () => {
                     thongTinNguoiDung: data.content
                 })
             }
+
         } catch (error) {
             await dispatch(hideLoadingAction)
             console.log(error)

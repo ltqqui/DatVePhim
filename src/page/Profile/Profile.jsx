@@ -2,6 +2,7 @@ import { CustomCard } from '@tsamantanis/react-glassmorphism'
 import { Button, Form, Input, Select, Table, Tabs } from 'antd'
 import React, { Fragment, useEffect } from 'react'
 import _ from 'lodash'
+import './Profile.css'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { capNhatThongTinNguoiDungAction, layDanhSachLoaiNguoiDung, layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
@@ -10,7 +11,7 @@ import { GROUPID, USER_LOGIN } from '../../utils/Setting/config';
 function Profile() {
     const { thongTinNguoiDung, danhSachLoaiNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
     const dispatch = useDispatch();
-    const maLoaiNguoiDung = JSON.parse(localStorage.getItem(USER_LOGIN)).maLoaiNguoiDung
+    const maLoaiNguoiDung = JSON.parse(localStorage.getItem(USER_LOGIN))?.maLoaiNguoiDung
     console.log(maLoaiNguoiDung)
     console.log(thongTinNguoiDung)
     useEffect(() => {
@@ -38,8 +39,8 @@ function Profile() {
         formik.setFieldValue('maLoaiNguoiDung', value);
     }
     return (
-        <div className=' justify-center items-center flex'>
-            <Form style={{ width: '50%', background: '#fff', padding: 15, borderRadius: 10 }} labelCol={{
+        <div className=' justify-center items-center flex profile'>
+            <Form className='form-profile' style={{ width: '50%', background: '#fff', padding: 15, borderRadius: 10 }} labelCol={{
                 span: 4,
             }}
                 onSubmitCapture={formik.handleSubmit}
@@ -61,7 +62,7 @@ function Profile() {
                     <Input name='matKhau' value={formik.values.matKhau} onChange={formik.handleChange} />
                 </Form.Item>
                 <Form.Item label='Tác vụ'>
-                    <Button htmlType='submit'>Cập nhật</Button>
+                    <Button className='update ' htmlType='submit'>Cập nhật</Button>
                 </Form.Item>
             </Form>
         </div>
@@ -101,7 +102,7 @@ export default function DemoProfile() {
         })
     }
     return (
-        <div style={{ backgroundImage: 'url(/img/profile.jpg)', height: '100%', width: '100%', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'none' }}>
+        <div className='profile-parent' style={{ backgroundImage: 'url(/img/profile.jpg)', height: '100%', width: '100%', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'none' }}>
             <CustomCard style={{ minHeight: '100vh', paddingTop: '100px' }}
                 effectColor="##fff"
                 color="#fff"

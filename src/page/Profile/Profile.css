@@ -1,0 +1,25 @@
+@media screen and (max-width:  768px  ){
+    .form-profile{
+        width: 100% !important;
+    }
+    .profile .update{
+        font-size: 14px !important;
+    }
+}
+
+@media screen and (max-width:  480px  ){
+    .profile .ant-form-item{
+        margin-bottom: 5px;
+    }
+    .profile-parent .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+        /* width: 200px !important; */
+        width: 100% !important;
+    }
+    .profile .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list{
+        justify-content: space-between; 
+        width: 100% !important;
+    }
+    .profile-parent .ant-tabs-tab{
+        width: 50% !important;
+    }
+}
