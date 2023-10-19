@@ -8,16 +8,16 @@ import { SET_PHIM_DANG_CHIEU, SET_PHIM_SAP_CHIEU } from "../../redux/type/FilmTy
 import styleHome from '../../page/Home/Home.css'
 import { NavLink } from 'react-router-dom'
 import { CloudFilled } from "@ant-design/icons";
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} ${styleSlick['slick-next']}`}
-      style={{ ...style, display: "block", color: 'gray' }}
-      onClick={onClick}
-    />
-  );
-}
+  function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={`${className} ${styleSlick['slick-next']}`}
+        style={{ ...style, display: "block", color: 'gray' }}
+        onClick={onClick}
+      />
+    );
+  }
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;

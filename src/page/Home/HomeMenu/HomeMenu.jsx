@@ -7,7 +7,7 @@ export default function HomeMenu(props) {
   const { heThongRapChieu } = props
   const [{ width, height }, setSize] = useState({ width: window.innerWidth, height: window.innerHeight })
   let tabPos='left'
-  if(width<400){
+  if(width<600){
     tabPos='top'
   }
   const renderHomeMenu = () => {
